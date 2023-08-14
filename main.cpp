@@ -24,6 +24,8 @@
 #define RAYGUI_IMPLEMENTATION
 #define RAYGUI_SUPPORT_ICONS
 #include "raygui.h"
+#include "GameObject.h"
+
 
 int main(int argc, char* argv[])
 {
@@ -36,12 +38,12 @@ int main(int argc, char* argv[])
 
     SetTargetFPS(60);
     //--------------------------------------------------------------------------------------
-   
+    GameObject* gameObject = new GameObject(glm::vec2{ screenWidth / 2, screenHeight / 2 });
+
+
     // Main game loop
     while (!WindowShouldClose())    // Detect window close button or ESC key
     {
-
-        
         // Update
         //----------------------------------------------------------------------------------
         // TODO: Update your variables here
@@ -53,12 +55,15 @@ int main(int argc, char* argv[])
 
         ClearBackground(RAYWHITE);
 
+        gameObject->Draw();
+
         DrawText("Congrats! You created your first window!", 190, 200, 20, LIGHTGRAY);
         
         EndDrawing();
         //----------------------------------------------------------------------------------
     }
 
+    delete gameObject;
     // De-Initialization
     //--------------------------------------------------------------------------------------   
     CloseWindow();        // Close window and OpenGL context
