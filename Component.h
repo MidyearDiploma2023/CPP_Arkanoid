@@ -3,15 +3,19 @@
 class GameObject;
 class Component {
 
-private:
+protected:
+	
 	GameObject* parent;
+
 public:
-	Component(GameObject* parent);
+	
+	Component();
 	~Component();
 
+	void AddParent(GameObject& parent);
 
 public:
-	void Update();
+	virtual void Update() = 0;
 
-	void Draw();
+	virtual void Draw() = 0;
 };

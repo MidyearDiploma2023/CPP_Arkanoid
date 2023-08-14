@@ -1,18 +1,16 @@
 #include "Component.h"
 
-Component::Component(GameObject* parent)
+Component::Component()
 {
-	this->parent = parent;
+	parent = nullptr;
 }
 
 Component::~Component()
 {
 }
 
-void Component::Update()
+void Component::AddParent(GameObject& parent)
 {
+	this->parent = &parent;
 }
 
-void Component::Draw()
-{
-}

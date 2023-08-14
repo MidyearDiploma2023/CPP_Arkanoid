@@ -22,8 +22,8 @@
 
 		void UpdateTransform();
 
-		const glm::vec2 GetLocalPosition() const;
-		const glm::vec2 GetGlobalPosition() const;
+		const glm::vec2 GetLocalPosition();
+		const glm::vec2 GetGlobalPosition();
 
 		void Translate(const glm::vec2 translation);
 	};

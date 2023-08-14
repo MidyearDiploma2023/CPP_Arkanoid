@@ -13,6 +13,7 @@ GameObject::GameObject(glm::vec2 position)
 GameObject::GameObject(GameObject& parent, glm::vec2 position)
 {
 	transform = new ATransform(position, parent.transform);
+	
 }
 
 
@@ -29,6 +30,7 @@ GameObject::~GameObject() {
 
 void GameObject::AddComponent(Component* component)
 {
+	component->AddParent(*this);
 	components.push_back(component);
 
 }
@@ -38,6 +40,8 @@ void GameObject::Update()
 	for (int i = 0; i < components.size(); i++) {
 		components[i]->Update();
 	}
+
+	transform->UpdateTransform();
 
 }
 
@@ -49,4 +53,9 @@ void GameObject::Draw()
 		components[i]->Draw();
 	}
 
+}
+
+ATransform& GameObject::GetTransform()
+{
+	return *transform;
 }

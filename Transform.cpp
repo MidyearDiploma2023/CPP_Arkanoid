@@ -9,7 +9,9 @@ ATransform::ATransform(glm::vec2 position, ATransform* parent) : localPosition{p
     /*localPosition = position;
     this->parent = parent;
     isDirty = true;*/
-    
+    if (parent != nullptr) {
+        parent->children.push_back(this);
+    }
     UpdateTransform();
 }
 
@@ -37,21 +39,36 @@ void ATransform::UpdateTransform()
         }
         isDirty = false;
     }
+    else {
+        for (int i = 0; i < children.size(); i++) {
+            if (children[i]->isDirty) {
+                children[i]->UpdateTransform();
+            }
+        }
+
+    }
     
 
 }
 
-const glm::vec2 ATransform::GetLocalPosition() const
+const glm::vec2 ATransform::GetLocalPosition()
 {
+    if (isDirty) {
+        UpdateTransform();
+    }
     return localPosition;
 }
 
-const glm::vec2 ATransform::GetGlobalPosition() const
+const glm::vec2 ATransform::GetGlobalPosition()
 {
+    if (isDirty) {
+        UpdateTransform();
+    }
     return globalPosition;
 }
 
 void ATransform::Translate(const glm::vec2 translation)
 {
     localPosition += translation;
+    isDirty = true;
 }

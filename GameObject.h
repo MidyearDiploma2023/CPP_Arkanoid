@@ -6,10 +6,10 @@ class ATransform;
 class Component;
 
 class GameObject {
-private:
+protected:
 
-	ATransform* transform;
 	std::vector<Component*> components;
+	ATransform* transform;
 
 public:
 	GameObject(glm::vec2 position);
@@ -22,7 +22,7 @@ public:
 	void Draw();
 
 
-
+	ATransform& GetTransform();
 
 
 
